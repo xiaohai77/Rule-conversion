@@ -1,14 +1,6 @@
 name: Build mihomo rule-set (mrs)
 
 on:
-  push:
-    branches: [ main ]
-    paths:
-      - 'links-domain.txt'
-      - 'links-ipcidr.txt'
-      - 'rule/common.py'
-      - 'rule/build_mihomo.py'
-      - '.github/workflows/mrs.yml'
   workflow_dispatch:
   schedule:
     - cron: '0 12 * * *'
@@ -20,9 +12,6 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    # mrs.yml 也需要 sing-box：links.txt 里如果混了 srs:/adguard: 类型的输入，
-    # 需要先靠 sing-box decompile/convert 才能拿到中间格式。
-    # 这一步绝不会往 rule/singbox/ 写文件。
     - name: "Setup sing-box"
       env:
         SING_BOX_DEB_URL: "https://github.com/SagerNet/sing-box/releases/download/v1.10.0-alpha.27/sing-box_1.10.0-alpha.27_linux_amd64.deb"
@@ -60,6 +49,7 @@ jobs:
       run: |
         git config --global user.email "action@github.com"
         git config --global user.name "GitHub Action"
+
         git add ./rule/mihomo/domain/*.yaml ./rule/mihomo/domain/*.mrs 2>/dev/null || true
         git add ./rule/mihomo/ipcidr/*.yaml ./rule/mihomo/ipcidr/*.mrs 2>/dev/null || true
 
@@ -67,6 +57,7 @@ jobs:
           echo "No changes to commit"
           exit 0
         fi
+
         git commit -m "Update mihomo rule-set"
 
         for i in 1 2 3 4 5; do
@@ -75,9 +66,11 @@ jobs:
             echo "push 成功"
             exit 0
           fi
+
           git rebase --abort 2>/dev/null || true
           echo "push 冲突，第 $i 次重试..."
           sleep $(( (RANDOM % 8) + 2 ))
         done
+
         echo "重试多次仍失败"
         exit 1
