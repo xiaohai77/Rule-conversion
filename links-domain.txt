@@ -1,0 +1,23 @@
+# ============================================================
+# 域名类规则源。只会提取 domain / domain_suffix / domain_keyword / domain_regex，
+# 其余字段(如某条源里混了 ip_cidr)会被忽略并打印提示。
+# srs.yml -> rule/singbox/domain/    mrs.yml -> rule/mihomo/domain/
+#
+# 写法: [自定义名字 ]<链接>，前缀协议同 links-ipcidr.txt，见该文件说明。
+# ============================================================
+
+https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/Bilibili.list
+https://raw.githubusercontent.com/NobyDa/Script/master/Surge/WeChat.list
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/QuantumultX/Microsoft/Microsoft.list
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Telegram/Telegram.list
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/QuantumultX/Facebook/Facebook.list
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/QuantumultX/Telegram/Telegram.list
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/QuantumultX/Twitter/Twitter.list
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/QuantumultX/YouTube/YouTube.list
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/QuantumultX/Netflix/Netflix.list
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/QuantumultX/TikTok/TikTok.list
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/OpenAI/OpenAI.yaml
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/AppleMusic/AppleMusic.yaml
+https://adrules.top/adrules_domainset.txt
+https://raw.githubusercontent.com/Loyalsoldier/surge-rules/release/gfw.txt
+AdServers adguard:https://raw.githubusercontent.com/AdguardTeam/AdguardFilters/master/BaseFilter/sections/adservers.txt
