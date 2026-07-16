@@ -1,0 +1,23 @@
+https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/Bilibili.list
+https://raw.githubusercontent.com/NobyDa/Script/master/Surge/WeChat.list
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/QuantumultX/Microsoft/Microsoft.list
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Telegram/Telegram.list
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/QuantumultX/Facebook/Facebook.list
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/QuantumultX/Telegram/Telegram.list
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/QuantumultX/Twitter/Twitter.list
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/QuantumultX/YouTube/YouTube.list
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/QuantumultX/Netflix/Netflix.list
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/QuantumultX/TikTok/TikTok.list
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/OpenAI/OpenAI.yaml
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/AppleMusic/AppleMusic.yaml
+https://adrules.top/adrules_domainset.txt
+https://raw.githubusercontent.com/Loyalsoldier/surge-rules/release/gfw.txt
+
+# --- 以下为新增前缀协议示例，按需自行增删 ---
+# adguard: 前缀 -> AdGuard filter 格式，走 sing-box convert --type adguard
+adguard:https://raw.githubusercontent.com/AdguardTeam/AdguardFilters/master/BaseFilter/sections/adservers.txt
+# srs: 前缀 -> 已编译的 sing-box 二进制规则集，会先 decompile 再重新生成 srs+mrs 两份
+# srs:https://example.com/some-rule.srs
+# json: 前缀 -> sing-box source json，直接读取后重新生成 srs+mrs 两份
+# json:https://example.com/some-rule.json
+# mrs 格式的规则源不支持导入：mihomo 官方未提供反解工具，放进来会被自动跳过
