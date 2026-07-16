@@ -1,3 +1,4 @@
+gfw https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/gfw.txt
 china https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/direct.txt
 proxy https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/proxy.txt
 private https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.yaml
