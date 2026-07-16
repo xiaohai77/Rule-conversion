@@ -1,6 +1,11 @@
+# txt
 gfw https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/gfw.txt
 china https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/direct.txt
 proxy https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/proxy.txt
+reject https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/reject.txt
+lan https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/lancidr.txt
+
+# yaml
 private https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.yaml
 telegram https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/telegram.yaml
 google https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google.yaml
