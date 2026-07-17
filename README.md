@@ -25,16 +25,41 @@
 
 ## 使用方式
 
-添加或修改规则源配置文件，填入需要转换的规则链接。
+Fork 本仓库后，根据需求修改规则源文件：
 
-提交代码后，GitHub Actions 会自动执行：
+```
+links-domain.txt
+links-ipcidr.txt
+links-mixed.txt
+```
 
-1. 拉取规则数据
-2. 解析规则内容
-3. 生成 Mihomo / sing-box rule-set
-4. 发布生成文件
+添加需要转换的规则集链接，提交后去触发 GitHub Actions 会自动生成对应规则文件。
 
-同时支持手动运行 GitHub Actions。
+### 规则文件说明
+
+|文件|说明|
+|-|-|
+|links-domain.txt|用于添加域名类规则集|
+|links-ipcidr.txt|用于添加 IP-CIDR 类规则集|
+|links-mixed.txt|用于添加同时包含域名和 IP-CIDR 的混合规则集|
+
+## GitHub Actions 权限设置
+
+Fork 仓库后，需要开启 Actions 写入权限：
+
+```
+Settings → Actions → General → Workflow permissions
+```
+
+选择：
+
+```
+Read and write permissions
+```
+
+并保存。
+
+否则 GitHub Actions 无法自动提交或发布生成的规则文件。
 
 ## Cloudflare Pages 部署
 
