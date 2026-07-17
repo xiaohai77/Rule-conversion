@@ -5,10 +5,11 @@ from datetime import datetime, timezone
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 ROOT_DIR = os.path.dirname(SCRIPT_DIR)
 
-# 不参与浏览页生成的目录/文件
-EXCLUDE_DIRS = {'.git', '.github', '__pycache__', 'node_modules', 'script'}
+# 只隐藏 git 内部目录和一些构建缓存，其余全部展示（.github / icon / script / 任何后缀文件都要露出来）
+HIDDEN_ALWAYS = {'.git'}
+EXCLUDE_DIRS = {'__pycache__', 'node_modules'}
 EXCLUDE_FILES = {'index.html'}
-EXCLUDE_FILE_EXTS = {'.py'}
+EXCLUDE_FILE_EXTS = set()
 
 COPY_ICON_SVG = (
     '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" '
@@ -136,7 +137,7 @@ def collect_entries(dir_path):
     if not os.path.isdir(dir_path):
         return dirs, files
     for name in sorted(os.listdir(dir_path)):
-        if name.startswith('.'):
+        if name in HIDDEN_ALWAYS:
             continue
         full = os.path.join(dir_path, name)
         if os.path.isdir(full):
