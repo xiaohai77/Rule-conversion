@@ -1,15 +1,6 @@
 name: Deploy rule feed to Cloudflare Pages
 
 on:
-  push:
-    branches:
-      - main
-  workflow_run:
-    workflows:
-      - "Build sing-box rule-set (srs)"
-      - "Build mihomo rule-set (mrs)"
-    types:
-      - completed
   schedule:
     - cron: '0 */12 * * *'
   workflow_dispatch:
@@ -17,12 +8,9 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'push' || github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
 
     steps:
     - uses: actions/checkout@v2
-      with:
-        ref: ${{ github.event.workflow_run.head_sha || github.ref }}
 
     - name: Set up Python3
       uses: actions/setup-python@v2
