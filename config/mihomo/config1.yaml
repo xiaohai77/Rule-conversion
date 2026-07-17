@@ -128,11 +128,9 @@ rule-providers:
   google_ip: {<<: *i, url: 'https://xiaohai-proxy.445568.xyz/rule/mihomo/google/google_IP.mrs', path: ./ruleset/google_ip.mrs}
   ai: {<<: *d, url: 'https://xiaohai-proxy.445568.xyz/rule/mihomo/ai/ai_Domain.mrs', path: ./ruleset/ai.mrs}
   github: {<<: *d, url: 'https://xiaohai-proxy.445568.xyz/rule/mihomo/github/github_Domain.mrs', path: ./ruleset/github.mrs}
-  fakeip-filter: {<<: *d, url: 'https://cdn.gh-proxy.org/https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/fakeip-filter.mrs', path: ./ruleset/fakeip-filter.mrs}
-  STUN: {<<: *d, url: 'https://testingcf.jsdelivr.net/gh/Kwisma/rules@main/rules/mihomo/STUN/STUN_Domain.mrs', path: ./ruleset/STUN.mrs}
   cn_ip: {<<: *i, url: 'https://xiaohai-proxy.445568.xyz/rule/mihomo/china/china_IP.mrs', path: ./ruleset/cn_ip.mrs}   
-  china-list: {<<: *d, url: 'https://xiaohai-proxy.445568.xyz/rule/mihomo/china/china_Domain.mrs', path: ./ruleset/china-list.mrs}
-  proxy-list: {<<: *d, url: 'https://xiaohai-proxy.445568.xyz/rule/mihomo/proxy/proxy_Domain.mrs', path: ./ruleset/proxy-list.mrs}
+  cn: {<<: *d, url: 'https://xiaohai-proxy.445568.xyz/rule/mihomo/china/china_Domain.mrs', path: ./ruleset/china-list.mrs}
+  proxy: {<<: *d, url: 'https://xiaohai-proxy.445568.xyz/rule/mihomo/proxy/proxy_Domain.mrs', path: ./ruleset/proxy-list.mrs}
    
 rules: 
   - DOMAIN-SUFFIX,xyz,𝑪𝑯𝑰𝑵𝑨
@@ -140,8 +138,6 @@ rules:
   - DOMAIN,challenges.cloudflare.com,𝑪𝑯𝑰𝑵𝑨
   - DOMAIN,stun.cloudflare.com,𝑪𝑯𝑰𝑵𝑨
   - DOMAIN,static.cloudflareinsights.com,𝑪𝑯𝑰𝑵𝑨
-  - RULE-SET,STUN,REJECT-DROP
-  - RULE-SET,fakeip-filter,𝑪𝑯𝑰𝑵𝑨
   - RULE-SET,private,𝑪𝑯𝑰𝑵𝑨
   - RULE-SET,private_ip,𝑪𝑯𝑰𝑵𝑨,no-resolve
   - RULE-SET,ai,𝑨𝑰-𝑶𝒏𝒍𝒚
@@ -150,7 +146,7 @@ rules:
   - RULE-SET,google_ip,𝑷𝑹𝑶𝑿𝒀,no-resolve
   - RULE-SET,telegram,𝑻𝒆𝒍𝒆𝒈𝒓𝒂𝒎
   - RULE-SET,telegram_ip,𝑻𝒆𝒍𝒆𝒈𝒓𝒂𝒎,no-resolve
-  - RULE-SET,proxy-list,𝑷𝑹𝑶𝑿𝒀
-  - RULE-SET,china-list,𝑪𝑯𝑰𝑵𝑨
+  - RULE-SET,proxy,𝑷𝑹𝑶𝑿𝒀
+  - RULE-SET,cn,𝑪𝑯𝑰𝑵𝑨
   - RULE-SET,cn_ip,𝑪𝑯𝑰𝑵𝑨,no-resolve
   - MATCH,𝑷𝑹𝑶𝑿𝒀
