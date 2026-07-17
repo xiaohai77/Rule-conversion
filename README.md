@@ -2,7 +2,7 @@
 
 一个用于抓取、转换、托管 mihomo（Clash Meta）与 sing-box 规则集的自动化项目。规则源每天自动更新，编译产物通过 Cloudflare Pages 发布，可直接在自己的代理客户端里订阅使用。
 
-CDN 地址：https://445568.xyz
+CDN 地址：https://xiaohai-rule.445568.xyz
 
 ## 目录结构
 
