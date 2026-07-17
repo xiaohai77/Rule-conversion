@@ -41,6 +41,12 @@ jobs:
         python -m pip install --upgrade pip
         pip install pandas requests pyyaml
 
+    - name: Fetch upstream meta-rules-dat links
+      run: python fetch_meta_links.py
+      working-directory: ./script/
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
     - name: Build mihomo rule-set
       run: python build_mihomo.py
       working-directory: ./script/
