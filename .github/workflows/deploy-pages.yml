@@ -22,11 +22,19 @@ jobs:
         # 跟着触发本次的那次 build 的 commit 走，保证发布的是最新构建出的文件
         ref: ${{ github.event.workflow_run.head_sha || github.ref }}
 
+    - name: Set up Python3
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.x
+
+    - name: Generate index page
+      run: python3 rule/generate_index.py
+
     - name: Deploy to Cloudflare Pages
       uses: cloudflare/pages-action@v1
       with:
         apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-        projectName: ${{ secrets.CLOUDFLARE_PAGES_PROJECT_NAME }}
+        projectName: ${{ secrets.CLOUDFLARE_PAGES }}
         directory: rule
         gitHubToken: ${{ secrets.GITHUB_TOKEN }}
