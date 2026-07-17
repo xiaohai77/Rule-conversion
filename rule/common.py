@@ -1,15 +1,3 @@
-"""
-共享解析库。
-
-build_singbox.py 和 build_mihomo.py 都从这里导入，
-两者各自独立运行、各自只负责写自己的输出目录，互不依赖。
-
-统一中间格式:
-    unified: dict[str, set[str]]
-    key 是 sing-box 字段名 (domain / domain_suffix / domain_keyword /
-        domain_regex / ip_cidr / source_ip_cidr / port / source_port / geoip)
-    value 是该类型下的地址集合
-"""
 import pandas as pd
 import os
 import json
@@ -19,52 +7,37 @@ import ipaddress
 import subprocess
 from io import StringIO
 
-MAP_DICT = {'DOMAIN-SUFFIX': 'domain_suffix', 'HOST-SUFFIX': 'domain_suffix', 'host-suffix': 'domain_suffix',
-            'DOMAIN': 'domain', 'HOST': 'domain', 'host': 'domain',
-            'DOMAIN-KEYWORD': 'domain_keyword', 'HOST-KEYWORD': 'domain_keyword', 'host-keyword': 'domain_keyword',
-            'IP-CIDR': 'ip_cidr', 'ip-cidr': 'ip_cidr', 'IP-CIDR6': 'ip_cidr', 'IP6-CIDR': 'ip_cidr',
-            'SRC-IP-CIDR': 'source_ip_cidr', 'GEOIP': 'geoip', 'DST-PORT': 'port',
-            'SRC-PORT': 'source_port', "URL-REGEX": "domain_regex", "DOMAIN-REGEX": "domain_regex"}
+MAP_DICT = {
+    'DOMAIN-SUFFIX': 'domain_suffix', 'HOST-SUFFIX': 'domain_suffix', 'host-suffix': 'domain_suffix',
+    'DOMAIN': 'domain', 'HOST': 'domain', 'host': 'domain',
+    'DOMAIN-KEYWORD': 'domain_keyword', 'HOST-KEYWORD': 'domain_keyword', 'host-keyword': 'domain_keyword',
+    'IP-CIDR': 'ip_cidr', 'ip-cidr': 'ip_cidr', 'IP-CIDR6': 'ip_cidr', 'IP6-CIDR': 'ip_cidr',
+    'SRC-IP-CIDR': 'source_ip_cidr', 'GEOIP': 'geoip', 'DST-PORT': 'port',
+    'SRC-PORT': 'source_port', 'URL-REGEX': 'domain_regex', 'DOMAIN-REGEX': 'domain_regex'
+}
 
-# mihomo mrs 目前只支持这两种 behavior，其余类型只能留在 srs/json 里
 MIHOMO_MRS_SUPPORTED = {'domain', 'domain_suffix', 'ip_cidr'}
 
-# links-domain.txt / links-ipcidr.txt 分类过滤用
 DOMAIN_FIELDS = {'domain', 'domain_suffix', 'domain_keyword', 'domain_regex'}
 IPCIDR_FIELDS = {'ip_cidr', 'source_ip_cidr'}
 
 
 def filter_unified(unified, keep_fields):
-    """只保留 keep_fields 里的字段，返回 (filtered, dropped_fields)"""
     filtered = {k: v for k, v in unified.items() if k in keep_fields}
     dropped = sorted(set(unified.keys()) - keep_fields)
     return filtered, dropped
 
 
 def split_mixed_unified(unified):
-    """
-    给 links-mixed.txt 用：不预设这条源是纯域名/纯IP/混合，
-    直接按内容拆成两份，各自非空才留：
-        domain_part: 只含 DOMAIN_FIELDS
-        ipcidr_part: 只含 IPCIDR_FIELDS
-        leftover: 两边都不属于的字段 (比如 port/geoip)，两边都不会写，仅用于打印提示
-    """
     domain_part, _ = filter_unified(unified, DOMAIN_FIELDS)
     ipcidr_part, _ = filter_unified(unified, IPCIDR_FIELDS)
     leftover = sorted(set(unified.keys()) - DOMAIN_FIELDS - IPCIDR_FIELDS)
     return domain_part, ipcidr_part, leftover
 
+
 HEADERS = {'User-Agent': 'Mozilla/5.0'}
 
 
-# ------------------------------------------------------------
-# 输入类型识别: 支持前缀协议强制指定，或按扩展名自动判断
-#   srs:<url>       -> sing-box 二进制规则集，走 decompile（需要 sing-box）
-#   json:<url>       -> sing-box source json，直接读
-#   mrs:<url>         -> mihomo 二进制，官方无反解工具，直接跳过并警告
-#   adguard:<url>     -> AdGuard filter 文本，走 sing-box convert --type adguard（需要 sing-box）
-#   不带前缀        -> 按扩展名 .srs/.json/.mrs 自动判断，其余一律走文本/yaml解析
-# ------------------------------------------------------------
 def detect_source(link):
     for prefix in ('srs:', 'json:', 'mrs:', 'adguard:'):
         if link.startswith(prefix):
@@ -83,21 +56,12 @@ def base_name(link):
     name = os.path.basename(link.split('?')[0])
     for ext in ('.srs', '.mrs', '.json', '.yaml', '.yml', '.list', '.txt', '.conf'):
         if name.lower().endswith(ext):
-            name = name[: -len(ext)]
+            name = name[:-len(ext)]
             break
     return name or 'rule'
 
 
 def read_links(links_path="../links.txt"):
-    """
-    每行格式:  [自定义名字 ]<链接>
-    - 不写名字: 输出文件名自动从链接 URL 取 (去掉协议前缀和扩展名)
-    - 写了名字: 名字和链接之间用空格分隔，名字优先，例如:
-        WeChatCustom https://raw.githubusercontent.com/.../WeChat.list
-        MyAds adguard:https://example.com/ads.txt
-    返回 [(custom_name_or_None, link), ...]
-    文件不存在时返回空列表（不报错），方便某个分类暂时没有链接的情况。
-    """
     if not os.path.exists(links_path):
         print(f"[提示] {links_path} 不存在，跳过")
         return []
@@ -110,9 +74,8 @@ def read_links(links_path="../links.txt"):
         line = line.strip()
         if not line or line.startswith('#'):
             continue
-        parts = line.split(None, 1)  # 按任意空白切一刀，最多切一次
+        parts = line.split(None, 1)
         if len(parts) == 2 and ('://' in parts[1]):
-            # 第一段不含 :// ，且第二段像链接 -> 第一段是自定义名字
             results.append((parts[0], parts[1].strip()))
         else:
             results.append((None, line))
@@ -130,13 +93,12 @@ def run(cmd):
     print(f"$ {' '.join(cmd)}")
     result = subprocess.run(cmd, capture_output=True, text=True)
     if result.returncode != 0:
-        raise RuntimeError(f"命令执行失败: {' '.join(cmd)}\nstdout: {result.stdout}\nstderr: {result.stderr}")
+        raise RuntimeError(
+            f"命令执行失败: {' '.join(cmd)}\nstdout: {result.stdout}\nstderr: {result.stderr}"
+        )
     return result
 
 
-# ------------------------------------------------------------
-# 文本规则源解析 (clash yaml / surge list / quantumultx list / 纯域名文本)
-# ------------------------------------------------------------
 def read_yaml_from_url(url):
     return yaml.safe_load(requests.get(url, headers=HEADERS, timeout=60).text)
 
@@ -146,8 +108,12 @@ def read_list_from_url(url):
     if response.status_code != 200:
         return None
     csv_data = StringIO(response.text)
-    df = pd.read_csv(csv_data, header=None, names=['pattern', 'address', 'other', 'other2', 'other3'],
-                      on_bad_lines='skip')
+    df = pd.read_csv(
+        csv_data,
+        header=None,
+        names=['pattern', 'address', 'other', 'other2', 'other3'],
+        on_bad_lines='skip'
+    )
     filtered_rows = [row for _, row in df.iterrows() if 'AND' not in str(row['pattern'])]
     return pd.DataFrame(filtered_rows, columns=['pattern', 'address', 'other', 'other2', 'other3'])
 
@@ -189,7 +155,11 @@ def parse_and_convert_to_dataframe(link):
                     pattern, address = item.split(',', 1)
                 if ',' in address:
                     address = address.split(',', 1)[0]
-                rows.append({'pattern': pattern.strip(), 'address': address.strip(), 'other': None})
+                rows.append({
+                    'pattern': pattern.strip(),
+                    'address': address.strip(),
+                    'other': None
+                })
             return pd.DataFrame(rows, columns=['pattern', 'address', 'other'])
         except Exception:
             return read_list_from_url(link)
@@ -211,15 +181,12 @@ def text_source_to_unified(link):
     return unified
 
 
-# ------------------------------------------------------------
-# sing-box json <-> unified （需要 sing-box 二进制的分支都在这里）
-# ------------------------------------------------------------
 def singbox_json_to_unified(json_path):
     with open(json_path, 'r', encoding='utf-8') as f:
         data = json.load(f)
     unified = {}
     for rule in data.get('rules', []):
-        if 'type' in rule:  # 跳过 logical rule，两边都不支持这种组合规则
+        if 'type' in rule:
             continue
         for key, values in rule.items():
             if isinstance(values, list):
@@ -256,16 +223,12 @@ def adguard_url_to_unified(url, work_dir, name):
     json_path = os.path.join(work_dir, f"{name}.adguard.json")
     srs_tmp = os.path.join(work_dir, f"{name}.adguard.srs")
     download_to_file(url, txt_path)
-    # sing-box convert --type adguard 只能直接产出 srs，没有 source json 选项
-    # 所以先转成 srs 再 decompile 回 json，绕一圈换取统一中间格式
     run(["sing-box", "rule-set", "convert", "--type", "adguard", "--output", srs_tmp, txt_path])
     run(["sing-box", "rule-set", "decompile", "--output", json_path, srs_tmp])
     return singbox_json_to_unified(json_path)
 
 
 def link_to_unified(link, work_dir, custom_name=None):
-    """把一条 link 解析成 (name, unified) 或 (name, None)。
-    kind == 'mrs' 时返回 (name, 'UNSUPPORTED')，调用方据此打印跳过信息。"""
     kind, url = detect_source(link)
     name = custom_name or base_name(url)
 
