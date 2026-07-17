@@ -24,8 +24,8 @@ jobs:
       with:
         python-version: 3.x
 
-    - name: Generate index page
-      run: python3 rule/generate_index.py
+    - name: Generate index pages
+      run: python3 script/generate_index.py
 
     - name: Deploy to Cloudflare Pages
       uses: cloudflare/pages-action@v1
@@ -33,5 +33,5 @@ jobs:
         apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         projectName: ${{ secrets.CLOUDFLARE_PAGES }}
-        directory: rule
+        directory: .
         gitHubToken: ${{ secrets.GITHUB_TOKEN }}

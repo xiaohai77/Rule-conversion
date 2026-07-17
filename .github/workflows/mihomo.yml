@@ -43,15 +43,14 @@ jobs:
 
     - name: Build mihomo rule-set
       run: python build_mihomo.py
-      working-directory: ./rule/
+      working-directory: ./script/
 
     - name: Commit and push rule/mihomo
       run: |
         git config --global user.email "action@github.com"
         git config --global user.name "GitHub Action"
 
-        git add ./rule/mihomo/domain/*.yaml ./rule/mihomo/domain/*.mrs 2>/dev/null || true
-        git add ./rule/mihomo/ipcidr/*.yaml ./rule/mihomo/ipcidr/*.mrs 2>/dev/null || true
+        git add ./rule/mihomo
 
         if git diff --staged --quiet; then
           echo "No changes to commit"
