@@ -37,17 +37,17 @@ profile:
   smart-collector-size: 100
 geodata-mode: true
 geox-url:
-  geoip: 'https://ghfast.top/https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geoip.dat'
-  geosite: 'https://ghfast.top/https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geosite.dat'
-  asn: 'https://ghfast.top/https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/GeoLite2-ASN.mmdb'
+  geoip: 'https://gh.445568.xyz/https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geoip.dat'
+  geosite: 'https://gh.445568.xyz/https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geosite.dat'
+  asn: 'https://gh.445568.xyz/https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/GeoLite2-ASN.mmdb'
 
 lgbm-auto-update: true
 lgbm-update-interval: 72
-lgbm-url: "https://ghfast.top/https://v6.gh-proxy.com/https://github.com/vernesong/mihomo/releases/download/LightGBM-Model/Model-large.bin"
+lgbm-url: "https://gh.445568.xyz/https://v6.gh-proxy.com/https://github.com/vernesong/mihomo/releases/download/LightGBM-Model/Model-large.bin"
 
 external-controller: "[::]:9090"
 external-ui: ui
-external-ui-url: "https://ghfast.top/https://github.com/Zephyruso/zashboard/releases/latest/download/dist-cdn-fonts.zip"
+external-ui-url: "https://gh.445568.xyz/https://github.com/Zephyruso/zashboard/releases/latest/download/dist-cdn-fonts.zip"
 sniffer:
   enable: true
   force-dns-mapping: true
@@ -85,7 +85,6 @@ dns:
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
   fake-ip-filter:
-    - "rule-set:fakeip-filter"
     - "rule-set:private"
   default-nameserver:
     - https://223.5.5.5/dns-query
@@ -160,30 +159,34 @@ _default_mrs_domain: &d {type: http, behavior: domain, format: mrs, interval: 86
 _default_mrs_ip: &i {type: http, behavior: ipcidr, format: mrs, interval: 86400}
 
 rule-providers:
-  ads: {<<: *d, url: 'https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/Filters/AWAvenue-Ads-Rule-Clash.mrs', path: ./ruleset/ads.mrs}
-  stun: {<<: *d, url: 'https://testingcf.jsdelivr.net/gh/Kwisma/rules@main/rules/mihomo/STUN/STUN_Domain.mrs', path: ./ruleset/stun.mrs}
-  fakeip-filter: {<<: *d, url: 'https://testingcf.jsdelivr.net/gh/DustinWin/ruleset_geodata@mihomo-ruleset/fakeip-filter.mrs', path: ./ruleset/fakeip-filter.mrs}
-  private: {<<: *d, url: 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.mrs', path: ./ruleset/private.mrs}
-  private_ip: {<<: *i, url: 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/private.mrs', path: ./ruleset/private_ip.mrs}
-  global_ip: {<<: *i, url: 'https://cdn.jsdelivr.net/gh/GitMetaio/rule@master/rule/Clash/Global/Global_OCD_IP.mrs', path: ./ruleset/global_ip.mrs}  
-  global: {<<: *d, url: 'https://cdn.jsdelivr.net/gh/GitMetaio/rule@master/rule/Clash/Global/Global_OCD_Domain.mrs', path: ./ruleset/global.mrs}
-  cn: {<<: *d, url: 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.mrs', path: ./ruleset/cn.mrs}
-  cn_ip: {<<: *i, url: 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.mrs', path: ./ruleset/cn_ip.mrs} 
-  ai: {<<: *d, url: 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-ai-!cn.mrs', path: ./ruleset/ai.mrs}
-  telegram: {<<: *d, url: 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/telegram.mrs', path: ./ruleset/telegram.mrs}
-  telegram_ip: {<<: *i, url: 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/telegram.mrs', path: ./ruleset/telegram_ip.mrs}  
-
+  ads: {<<: *d, url: 'https://xiaohai-proxy.445568.xyz/rule/mihomo/AWAvenue/AWAvenue_Domain.mrs', path: ./ruleset/ads.mrs}
+  private: {<<: *d, url: 'https://xiaohai-proxy.445568.xyz/rule/mihomo/private/private_Domain.mrs', path: ./ruleset/private.mrs}
+  private_ip: {<<: *i, url: 'https://xiaohai-proxy.445568.xyz/rule/mihomo/private/private_IP.mrs', path: ./ruleset/private_ip.mrs}
+  telegram: {<<: *d, url: 'https://xiaohai-proxy.445568.xyz/rule/mihomo/telegram/telegram_Domain.mrs', path: ./ruleset/telegram.mrs}
+  telegram_ip: {<<: *i, url: 'https://xiaohai-proxy.445568.xyz/rule/mihomo/telegram/telegram_IP.mrs', path: ./ruleset/telegram_ip.mrs}  
+  google: {<<: *d, url: 'https://xiaohai-proxy.445568.xyz/rule/mihomo/google/google_Domain.mrs', path: ./ruleset/google.mrs}
+  google_ip: {<<: *i, url: 'https://xiaohai-proxy.445568.xyz/rule/mihomo/google/google_IP.mrs', path: ./ruleset/google_ip.mrs}
+  ai: {<<: *d, url: 'https://xiaohai-proxy.445568.xyz/rule/mihomo/ai/ai_Domain.mrs', path: ./ruleset/ai.mrs}
+  github: {<<: *d, url: 'https://xiaohai-proxy.445568.xyz/rule/mihomo/github/github_Domain.mrs', path: ./ruleset/github.mrs}
+  cn_ip: {<<: *i, url: 'https://xiaohai-proxy.445568.xyz/rule/mihomo/china/china_IP.mrs', path: ./ruleset/cn_ip.mrs}   
+  cn: {<<: *d, url: 'https://xiaohai-proxy.445568.xyz/rule/mihomo/china/china_Domain.mrs', path: ./ruleset/china-list.mrs}
+  proxy: {<<: *d, url: 'https://xiaohai-proxy.445568.xyz/rule/mihomo/proxy/proxy_Domain.mrs', path: ./ruleset/proxy-list.mrs}
+   
 rules: 
-  - RULE-SET,ads,REJECT
-  - RULE-SET,stun,REJECT-DROP
-  - RULE-SET,fakeip-filter,DIRECT
-  - RULE-SET,private,DIRECT
-  - RULE-SET,private_ip,DIRECT,no-resolve
+  - DOMAIN-SUFFIX,xyz,𝑪𝑯𝑰𝑵𝑨
+  - DOMAIN,a.nel.cloudflare.com,𝑪𝑯𝑰𝑵𝑨
+  - DOMAIN,challenges.cloudflare.com,𝑪𝑯𝑰𝑵𝑨
+  - DOMAIN,stun.cloudflare.com,𝑪𝑯𝑰𝑵𝑨
+  - DOMAIN,static.cloudflareinsights.com,𝑪𝑯𝑰𝑵𝑨
+  - RULE-SET,private,𝑪𝑯𝑰𝑵𝑨
+  - RULE-SET,private_ip,𝑪𝑯𝑰𝑵𝑨,no-resolve
   - RULE-SET,ai,𝑨𝑰-𝑶𝒏𝒍𝒚
+  - RULE-SET,github,𝑷𝑹𝑶𝑿𝒀
+  - RULE-SET,google,𝑷𝑹𝑶𝑿𝒀
+  - RULE-SET,google_ip,𝑷𝑹𝑶𝑿𝒀,no-resolve
   - RULE-SET,telegram,𝑻𝒆𝒍𝒆𝒈𝒓𝒂𝒎
   - RULE-SET,telegram_ip,𝑻𝒆𝒍𝒆𝒈𝒓𝒂𝒎,no-resolve
-  - RULE-SET,global,𝑷𝑹𝑶𝑿𝒀
-  - RULE-SET,global_ip,𝑷𝑹𝑶𝑿𝒀,no-resolve
+  - RULE-SET,proxy,𝑷𝑹𝑶𝑿𝒀
   - RULE-SET,cn,𝑪𝑯𝑰𝑵𝑨
   - RULE-SET,cn_ip,𝑪𝑯𝑰𝑵𝑨,no-resolve
   - MATCH,𝑷𝑹𝑶𝑿𝒀
