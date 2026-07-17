@@ -12,6 +12,7 @@ fakeip-filter https://github.com/DustinWin/ruleset_geodata/releases/download/mih
 STUN https://testingcf.jsdelivr.net/gh/Kwisma/rules@main/rules/mihomo/STUN/STUN.list
 tiktok https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/tiktok.yaml
 cloudflare https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cloudflare.yaml
+twitter https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/twitter.yaml
 
 #IP规则
 china https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/cncidr.txt
