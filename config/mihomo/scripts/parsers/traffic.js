@@ -1,21 +1,18 @@
-// 支持实时抓取 + 自定义流量追加
 async function operator(proxies = [], targetPlatform, context) {
   const SUBS_KEY = 'subs'
   const COLLECTIONS_KEY = 'collections'
   const $ = $substore
   const { source } = context
   const { _collection: collection } = source
-  
+
   if (!collection || Object.keys(source).length > 1) throw new Error('暂时仅支持组合订阅, 请在组合订阅中使用此脚本')
 
-  // --- 【读取自定义参数】 ---
   let extraGB = 0
   if (typeof $arguments !== 'undefined' && $arguments.extra) {
     extraGB = parseFloat($arguments.extra)
   }
   const GB_IN_BYTES = 1024 * 1024 * 1024
   const extraBytes = extraGB * GB_IN_BYTES
-  // ----------------------------
 
   const allSubs = $.read(SUBS_KEY) || []
   let uploadSum = 0
@@ -27,8 +24,7 @@ async function operator(proxies = [], targetPlatform, context) {
 
   const subnames = [...collection.subscriptions]
   let subscriptionTags = collection.subscriptionTags
-  
-  // 标签处理逻辑
+
   if (Array.isArray(subscriptionTags) && subscriptionTags.length > 0) {
     allSubs.forEach(sub => {
       if (
@@ -42,20 +38,18 @@ async function operator(proxies = [], targetPlatform, context) {
     })
   }
 
-  // 核心循环：实时抓取每个子订阅的流量
   for await (const sub of allSubs) {
     if (subnames.includes(sub.name)) {
       let subInfo
       let flowInfo
-      
-      // 实时联网获取逻辑
+
       if (sub.source !== 'local' || ['localFirst', 'remoteFirst'].includes(sub.mergeSources)) {
         try {
           let url = `${sub.url}`.split(/[\r\n]+/).map(i => i.trim()).filter(i => i.length)?.[0] || ''
           let subArgs = {}
           const rawArgs = url.split('#')
           url = url.split('#')[0]
-          
+
           if (rawArgs.length > 1) {
             try {
               subArgs = JSON.parse(decodeURIComponent(rawArgs[1]))
@@ -88,7 +82,6 @@ async function operator(proxies = [], targetPlatform, context) {
         }
       }
 
-      // 处理自定义流量链接逻辑
       if (sub.subUserinfo) {
         let subUserInfoStr
         if (/^https?:\/\//.test(sub.subUserinfo)) {
@@ -107,7 +100,6 @@ async function operator(proxies = [], targetPlatform, context) {
         }
       }
 
-      // 解析并累加
       if (subInfo) {
         const { total, usage: { upload, download }, expires } = parseFlowHeaders(subInfo)
         if (upload > 0) uploadSum += upload
@@ -120,15 +112,12 @@ async function operator(proxies = [], targetPlatform, context) {
     }
   }
 
-  // --- 【此处注入你的流量信息】 ---
   const finalTotalSum = totalSum + extraBytes
-  // --------------------------------------
 
   const subUserInfo = `upload=${uploadSum}; download=${downloadSum}; total=${finalTotalSum}${
     expire ? ` ; expire=${expire}` : ''
   }`
 
-  // 写入数据库以便界面显示
   const allCols = $.read(COLLECTIONS_KEY) || []
   for (var index = 0; index < allCols.length; index++) {
     if (collection.name === allCols[index].name) {
@@ -138,7 +127,6 @@ async function operator(proxies = [], targetPlatform, context) {
   }
   $.write(allCols, COLLECTIONS_KEY)
 
-  // 注入响应头供客户端使用
   if (typeof $options !== 'undefined' && $options) {
     $options._res = {
       headers: {
