@@ -7,9 +7,9 @@ import common
 # 三个来源统一处理：每条链接不论写在哪个文件里，都会按自身实际包含的
 # 字段自动拆成 domain / ip 两部分，分别写入 mihomo/<name>/ 下
 LINKS_FILES = [
-    "../links-domain.txt",
-    "../links-ipcidr.txt",
-    "../links-mixed.txt",
+    "../links/links-domain.txt",
+    "../links/links-ipcidr.txt",
+    "../links/links-mixed.txt",
 ]
 
 OUTPUT_ROOT = "../rule/mihomo"

@@ -5,9 +5,9 @@ import tempfile
 import common
 
 LINKS_FILES = [
-    "../links-domain.txt",
-    "../links-ipcidr.txt",
-    "../links-mixed.txt",
+    "../links/links-domain.txt",
+    "../links/links-ipcidr.txt",
+    "../links/links-mixed.txt",
 ]
 
 OUTPUT_ROOT = "../rule/singbox"
