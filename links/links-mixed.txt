@@ -8,6 +8,7 @@ google https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosi
 github https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/github.yaml
 ai https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-ai-!cn.yaml
 AWAvenue https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/Filters/AWAvenue-Ads-Rule-QuantumultX.list
+fakeip-filter https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/fakeip-filter.list
 
 #IP规则
 china https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/cncidr.txt
