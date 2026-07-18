@@ -2,7 +2,7 @@ name: Deploy rule feed to Cloudflare Pages
 
 on:
   schedule:
-    - cron: '0 */12 * * *'
+    - cron: '0 4 * * *'
   workflow_dispatch:
 
 jobs:
