@@ -11,8 +11,8 @@ except ImportError:
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 ROOT_DIR = os.path.dirname(SCRIPT_DIR)
 
-# 只隐藏 git 内部目录和一些构建缓存，其余全部展示（.github / icon / script / 任何后缀文件都要露出来）
-HIDDEN_ALWAYS = {'.git'}
+# 隐藏 git 内部目录、.github（不会被部署到 Cloudflare Pages）和一些构建缓存，其余全部展示（icon / script / 任何后缀文件都要露出来）
+HIDDEN_ALWAYS = {'.git', '.github'}
 EXCLUDE_DIRS = {'__pycache__', 'node_modules'}
 EXCLUDE_FILES = {'index.html'}
 EXCLUDE_FILE_EXTS = set()
@@ -244,7 +244,7 @@ def page_shell(title, crumb, body):
 {crumb}
 <h1>{html_lib.escape(title)}</h1>
 {body}
-<footer>由 script/generate_index.py 自动生成</footer>
+<footer>由 XiaoHaiSly 维护</footer>
 </div>
 <script>{SCRIPT}</script>
 </body>

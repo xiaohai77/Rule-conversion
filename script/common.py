@@ -194,6 +194,30 @@ def singbox_json_to_unified(json_path):
     return unified
 
 
+QX_FIELD_MAP = {
+    'domain': 'HOST',
+    'domain_suffix': 'HOST-SUFFIX',
+    'domain_keyword': 'HOST-KEYWORD',
+}
+
+
+def write_qx_list(domain_part, ipcidr_part, list_path):
+    """生成 QuantumultX filter 规则格式的纯文本列表（HOST/HOST-SUFFIX/HOST-KEYWORD/IP-CIDR，不带策略名）"""
+    lines = []
+    for field, qx_tag in QX_FIELD_MAP.items():
+        for addr in sorted(domain_part.get(field, [])):
+            lines.append(f"{qx_tag},{addr}")
+    for addr in sorted(ipcidr_part.get('ip_cidr', [])):
+        tag = 'IP6-CIDR' if ':' in addr else 'IP-CIDR'
+        lines.append(f"{tag},{addr}")
+    if not lines:
+        return False
+    os.makedirs(os.path.dirname(list_path), exist_ok=True)
+    with open(list_path, 'w', encoding='utf-8') as f:
+        f.write('\n'.join(lines) + '\n')
+    return True
+
+
 def unified_to_singbox_json(unified, json_path):
     result_rules = {"version": 2, "rules": []}
     for pattern in sorted(unified.keys()):

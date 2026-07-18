@@ -104,6 +104,8 @@ def build_group(name, links, work_dir, output_root):
         wrote.append("Domain")
     if build_ip_files(ipcidr_part, name, out_dir):
         wrote.append("IP")
+    if common.write_qx_list(domain_part, ipcidr_part, os.path.join(out_dir, f"{name}.list")):
+        wrote.append("List")
 
     if wrote:
         print(f"[完成] {name} -> {output_root}/{name}/ ({','.join(wrote)})，共 {len(links)} 个源")
