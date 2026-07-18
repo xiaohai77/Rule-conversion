@@ -173,7 +173,7 @@
       {
         "tag": "ads_domain",
         "type": "remote",
-        "format": "source",
+        "format": "binary",
         "url": "https://xiaohai-proxy.445568.xyz/rules/singbox/AWAvenue/AWAvenue_Domain.srs",
         "download_detour": "Direct"
       },
