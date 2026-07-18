@@ -2,7 +2,7 @@ import os
 import requests
 
 LINKS_PATH = os.path.join(os.path.dirname(__file__), "..", "links", "links-geodata.txt")
-OUTPUT_DIR = os.path.join(os.path.dirname(__file__), "..", "geo-data", "geodata")
+OUTPUT_DIR = os.path.join(os.path.dirname(__file__), "..", "georules", "geodata")
 
 
 def read_entries(path):
@@ -51,7 +51,7 @@ def download(custom_name, url, out_dir):
                 size += len(chunk)
     os.replace(tmp_dest, dest)
 
-    print(f"[完成] {url} -> geo-data/geodata/{filename} ({size} 字节)")
+    print(f"[完成] {url} -> georules/geodata/{filename} ({size} 字节)")
 
 
 def main():

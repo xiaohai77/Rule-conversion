@@ -15,11 +15,11 @@ RULES_LINKS_FILES = [
 RULES_OUTPUT_ROOT = "../rules/quantumultx"
 
 # 自动从 MetaCubeX/meta-rules-dat 拉取的全量 geosite+geoip（links-meta.txt）
-# 输出到 geo-data/quantumultx，与 geo-data/mihomo、geo-data/singbox 平级
+# 输出到 georules/quantumultx，与 georules/mihomo、georules/singbox 平级
 GEO_LINKS_FILES = [
     "../links/links-meta.txt",
 ]
-GEO_OUTPUT_ROOT = "../geo-data/quantumultx"
+GEO_OUTPUT_ROOT = "../georules/quantumultx"
 
 
 def merge_unified(unified_list):

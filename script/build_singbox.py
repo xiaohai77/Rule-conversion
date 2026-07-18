@@ -15,11 +15,11 @@ RULES_LINKS_FILES = [
 RULES_OUTPUT_ROOT = "../rules/singbox"
 
 # 自动从 MetaCubeX/meta-rules-dat 拉取的全量 geosite+geoip（links-meta.txt）
-# 输出到 geo-data/singbox，与手动维护的规则分开存放
+# 输出到 georules/singbox，与手动维护的规则分开存放
 GEO_LINKS_FILES = [
     "../links/links-meta.txt",
 ]
-GEO_OUTPUT_ROOT = "../geo-data/singbox"
+GEO_OUTPUT_ROOT = "../georules/singbox"
 
 
 def write_domain(filtered, name, out_dir):

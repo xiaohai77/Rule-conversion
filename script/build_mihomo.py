@@ -15,11 +15,11 @@ RULES_LINKS_FILES = [
 RULES_OUTPUT_ROOT = "../rules/mihomo"
 
 # 自动从 MetaCubeX/meta-rules-dat 拉取的全量 geosite+geoip（links-meta.txt）
-# 输出到 geo-data/mihomo，与手动维护的规则分开存放
+# 输出到 georules/mihomo，与手动维护的规则分开存放
 GEO_LINKS_FILES = [
     "../links/links-meta.txt",
 ]
-GEO_OUTPUT_ROOT = "../geo-data/mihomo"
+GEO_OUTPUT_ROOT = "../georules/mihomo"
 
 
 def build_domain_files(filtered, name, out_dir):
