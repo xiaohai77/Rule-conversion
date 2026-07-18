@@ -26,8 +26,8 @@ def write_domain(filtered, name, out_dir):
     if not filtered:
         return False
     os.makedirs(out_dir, exist_ok=True)
-    json_path = os.path.join(out_dir, f"{name}_Domain.json")
-    srs_path = os.path.join(out_dir, f"{name}_Domain.srs")
+    json_path = os.path.join(out_dir, f"{name}.json")
+    srs_path = os.path.join(out_dir, f"{name}.srs")
     common.unified_to_singbox_json(filtered, json_path)
     common.run(["sing-box", "rule-set", "compile", "--output", srs_path, json_path])
     return True
@@ -37,8 +37,8 @@ def write_ip(filtered, name, out_dir):
     if not filtered:
         return False
     os.makedirs(out_dir, exist_ok=True)
-    json_path = os.path.join(out_dir, f"{name}_IP.json")
-    srs_path = os.path.join(out_dir, f"{name}_IP.srs")
+    json_path = os.path.join(out_dir, f"{name}.json")
+    srs_path = os.path.join(out_dir, f"{name}.srs")
     common.unified_to_singbox_json(filtered, json_path)
     common.run(["sing-box", "rule-set", "compile", "--output", srs_path, json_path])
     return True
@@ -89,15 +89,16 @@ def build_group(name, links, work_dir, output_root):
     if leftover:
         print(f"[提示] {name}: 以下字段既不算域名也不算IP，已跳过: {leftover}")
 
-    out_dir = output_root
+    domain_dir = os.path.join(output_root, "domain")
+    ipcidr_dir = os.path.join(output_root, "ipcidr")
     wrote = []
-    if write_domain(domain_part, name, out_dir):
+    if write_domain(domain_part, name, domain_dir):
         wrote.append("Domain")
-    if write_ip(ipcidr_part, name, out_dir):
+    if write_ip(ipcidr_part, name, ipcidr_dir):
         wrote.append("IP")
 
     if wrote:
-        print(f"[完成] {name} -> {output_root}/ ({','.join(wrote)})，共 {len(links)} 个源")
+        print(f"[完成] {name} -> {output_root}/{{domain,ipcidr}}/ ({','.join(wrote)})，共 {len(links)} 个源")
     else:
         print(f"[跳过] {name}：识别不出域名或IP规则")
 

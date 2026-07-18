@@ -28,8 +28,8 @@ def build_domain_files(filtered, name, out_dir):
     if not domain_lines:
         return False
     os.makedirs(out_dir, exist_ok=True)
-    yaml_path = os.path.join(out_dir, f"{name}_Domain.yaml")
-    mrs_path = os.path.join(out_dir, f"{name}_Domain.mrs")
+    yaml_path = os.path.join(out_dir, f"{name}.yaml")
+    mrs_path = os.path.join(out_dir, f"{name}.mrs")
     common.yaml.safe_dump({'payload': domain_lines}, open(yaml_path, 'w', encoding='utf-8'), allow_unicode=True)
     common.run(["mihomo", "convert-ruleset", "domain", "yaml", yaml_path, mrs_path])
     return True
@@ -40,8 +40,8 @@ def build_ip_files(filtered, name, out_dir):
     if not ip_lines:
         return False
     os.makedirs(out_dir, exist_ok=True)
-    yaml_path = os.path.join(out_dir, f"{name}_IP.yaml")
-    mrs_path = os.path.join(out_dir, f"{name}_IP.mrs")
+    yaml_path = os.path.join(out_dir, f"{name}.yaml")
+    mrs_path = os.path.join(out_dir, f"{name}.mrs")
     common.yaml.safe_dump({'payload': ip_lines}, open(yaml_path, 'w', encoding='utf-8'), allow_unicode=True)
     common.run(["mihomo", "convert-ruleset", "ipcidr", "yaml", yaml_path, mrs_path])
     return True
@@ -98,15 +98,16 @@ def build_group(name, links, work_dir, output_root):
     if mrs_unsupported:
         print(f"[提示] {name}: 以下字段 mihomo mrs 不支持，已跳过: {sorted(mrs_unsupported)}")
 
-    out_dir = output_root
+    domain_dir = os.path.join(output_root, "domain")
+    ipcidr_dir = os.path.join(output_root, "ipcidr")
     wrote = []
-    if build_domain_files(domain_part, name, out_dir):
+    if build_domain_files(domain_part, name, domain_dir):
         wrote.append("Domain")
-    if build_ip_files(ipcidr_part, name, out_dir):
+    if build_ip_files(ipcidr_part, name, ipcidr_dir):
         wrote.append("IP")
 
     if wrote:
-        print(f"[完成] {name} -> {output_root}/ ({','.join(wrote)})，共 {len(links)} 个源")
+        print(f"[完成] {name} -> {output_root}/{{domain,ipcidr}}/ ({','.join(wrote)})，共 {len(links)} 个源")
     else:
         print(f"[跳过] {name}：过滤后没有可生成 mrs 的规则")
 
