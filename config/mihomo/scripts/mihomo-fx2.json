@@ -44,8 +44,8 @@ function main(config) {
     "nameserver": ["https://dns.alidns.com/dns-query"],
     "proxy-server-nameserver": ["https://dns.alidns.com/dns-query"],
     "nameserver-policy": {
-      "rule-set:china-list": ["dns.alidns.com"],
-      "rule-set:proxy-list": ["https://dns.google/dns-query#𝑷𝑹𝑶𝒳𝒀"]
+      "rule-set:china": ["dns.alidns.com"],
+      "rule-set:proxy": ["https://dns.google/dns-query#𝑷𝑹𝑶𝑿𝒀"]
     }
   };
 
@@ -108,9 +108,9 @@ function main(config) {
     "google_ip": { ...bIp, url: M + "https://xiaohaisly.445568.xyz/rules/mihomo/ipcidr/google.mrs", path: "./ruleset/google_ip.mrs" },
     "ai": { ...bDomain, url: M + "https://xiaohaisly.445568.xyz/rules/mihomo/domain/Ai.mrs", path: "./ruleset/ai.mrs" },
     "github": { ...bDomain, url: M + "https://xiaohaisly.445568.xyz/rules/mihomo/domain/github.mrs", path: "./ruleset/github.mrs" },
-    "cn_ip": { ...bIp, url: M + "https://xiaohaisly.445568.xyz/rules/mihomo/ipcidr/china.mrs", path: "./ruleset/cn_ip.mrs" },
-    "china-list": { ...bDomain, url: M + "https://xiaohaisly.445568.xyz/rules/mihomo/domain/china.mrs", path: "./ruleset/china-list.mrs" },
-    "proxy-list": { ...bDomain, url: M + "https://xiaohaisly.445568.xyz/rules/mihomo/domain/proxy.mrs", path: "./ruleset/proxy-list.mrs" }
+    "china_ip": { ...bIp, url: M + "https://xiaohaisly.445568.xyz/rules/mihomo/ipcidr/china.mrs", path: "./ruleset/cn_ip.mrs" },
+    "china": { ...bDomain, url: M + "https://xiaohaisly.445568.xyz/rules/mihomo/domain/china.mrs", path: "./ruleset/china-list.mrs" },
+    "proxy": { ...bDomain, url: M + "https://xiaohaisly.445568.xyz/rules/mihomo/domain/proxy.mrs", path: "./ruleset/proxy-list.mrs" }
   };
 
   config["rules"] = [
@@ -127,9 +127,9 @@ function main(config) {
     "RULE-SET,google_ip,𝑷𝑹𝑶𝑿𝒀,no-resolve",
     "RULE-SET,telegram,𝑻𝒆𝒍𝒆𝒈𝒓𝒂𝒎",
     "RULE-SET,telegram_ip,𝑻𝒆𝒍𝒆𝒈𝒓𝒂𝒎,no-resolve",
-    "RULE-SET,proxy-list,𝑷𝑹𝑶𝑿𝒀",
-    "RULE-SET,china-list,𝑪𝑯𝑰𝑵𝑨",
-    "RULE-SET,cn_ip,𝑪𝑯𝑰𝑵𝑨,no-resolve",
+    "RULE-SET,proxy,𝑷𝑹𝑶𝑿𝒀",
+    "RULE-SET,china,𝑪𝑯𝑰𝑵𝑨",
+    "RULE-SET,china_ip,𝑪𝑯𝑰𝑵𝑨,no-resolve",
     "MATCH,𝑷𝑹𝑶𝑿𝒀"
   ];
 
