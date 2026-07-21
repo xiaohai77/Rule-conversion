@@ -566,6 +566,7 @@ payload:
 - tlmr-hamivideo2.cdn.hinet.net
 - tmdb-image-prod.b-cdn.net
 - tmdb-web-image-prod.b-cdn.net
+- trojan-gfw.github.io
 - tv.applemusic.com
 - tvcastlive-hamivideo.cdn.hinet.net
 - ubisoft-orbit-savegames.s3.amazonaws.com
@@ -735,6 +736,7 @@ payload:
 - www-cdn.icloud.com.akadns.net
 - www.microsoft.com
 - www.quora.com.cdn.cloudflare.net
+- xtls.github.io
 - yangzhi.app
 - yt3.googleusercontent.com
 - zeenews-fonts.s3.amazonaws.com
@@ -4087,6 +4089,7 @@ payload:
 - +.berlinerbericht.de
 - +.berlintwitterwall.com
 - +.best-sex-games.com
+- +.best2pay.net
 - +.best4bim.com
 - +.bestbeats4u.com
 - +.bestbhy.com
@@ -6228,6 +6231,7 @@ payload:
 - +.clashofclans.com
 - +.clashroyale.com
 - +.clashroyaleapp.com
+- +.clashyun.com
 - +.clasporno.org
 - +.classicalguitarblog.net
 - +.classicnike.com
@@ -8827,6 +8831,8 @@ payload:
 - +.f-droid.com
 - +.f-droid.org
 - +.f-secure.com
+- +.f1.com
+- +.f1tv.com
 - +.f2pool.com
 - +.f5pf.com
 - +.f6.dev
@@ -9655,6 +9661,7 @@ payload:
 - +.formit360.com
 - +.formitfactory.com
 - +.forms.new
+- +.formula1.com
 - +.forpojie.pics
 - +.forshtadt.ru
 - +.fortawesome.com
@@ -12363,6 +12370,7 @@ payload:
 - +.hutao.cloud
 - +.hutianyi.net
 - +.hutpromos.com
+- +.hva.im
 - +.hwayue.org.tw
 - +.hwgo.com
 - +.hwslabs.com
@@ -19837,8 +19845,10 @@ payload:
 - +.rbnainternational.com
 - +.rbplc.com
 - +.rbrandlibrary.com
+- +.rbsgate.com
 - +.rbsgr.com
 - +.rbspeakup.com
+- +.rbsuat.com
 - +.rbth.com
 - +.rbx.com
 - +.rbxcdn.com
@@ -22227,6 +22237,7 @@ payload:
 - +.syosetu.com
 - +.sysinternals.com
 - +.system76.com
+- +.sysub.com
 - +.syzbj36.xyz
 - +.szabadeuropa.hu
 - +.szcheapmonsterheadphones.com

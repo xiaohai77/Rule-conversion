@@ -714,6 +714,7 @@ fonts https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosit
 fontshop https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/fontshop.yaml
 fontsinuse https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/fontsinuse.yaml
 forbes https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/forbes.yaml
+formula1 https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/formula1.yaml
 forza https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/forza.yaml
 fox https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/fox.yaml
 fqnovel https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/fqnovel.yaml
@@ -1722,6 +1723,7 @@ vmware https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosi
 vmware@cn https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/vmware@cn.yaml
 voanews https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/voanews.yaml
 vodafone https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/vodafone.yaml
+vokino https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/vokino.yaml
 volcengine https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/volcengine.yaml
 volmoe https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/volmoe.yaml
 volvo https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/volvo.yaml
